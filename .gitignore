@@ -1,0 +1,6 @@
+/venv
+.env
+*.swp
+*.pyc
+*.mp3
+*.ogg

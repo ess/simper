@@ -1,0 +1,47 @@
+#!/usr/bin/env python
+
+import os
+import json
+from gtts import gTTS
+
+
+class PoetryReader(object):
+    rows = []
+
+    def reader(self, obj, pre=None):
+
+        pre = pre[:] if pre else []
+
+        if isinstance(obj, list):
+            for val in obj:
+                self.reader(val, pre)
+
+        elif isinstance(obj, dict):
+            for key, val in obj.items():
+                self.reader(val, [key] + pre)
+
+        else:
+            out = [obj] + pre
+            out.reverse()
+            " ".join(out)
+            self.rows.append(out)
+
+    def run(self, filename):
+        outfile = "%s.mp3"%os.path.splitext(filename)[0]
+        with open(filename, "r") as f:
+            poim = json.loads(f.read())
+            self.reader(poim)
+            s = ".\n".join([" ".join(row) for row in self.rows])
+            tts = gTTS(text = s, lang = "en")
+            tts.save(outfile)
+
+
+if __name__ == "__main__":
+    pr = PoetryReader()
+    for filename in [
+            #"hell-schema.json",
+            #"love-schema.json",
+            "interlocutor-schema.json",
+            ]:
+        pr.run(filename)
+
