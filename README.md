@@ -1,7 +1,32 @@
 # simper
-- read json file to mp3 file
+Parse JSON file "end-to-end" and output text to an mp3 file of the same name. Not particularly useful, but I was having fun writing bad poetry in JSON format,s ince sestinas are so, like 12th century, man.
+
+A json file constructed like so:
+
+```json
+{
+	"happy": [
+		"clam",
+		"clown",
+		"bottle of": [
+			"bees",
+			"kazoos"
+		]
+	]
+}
+```
+. . . yields an mp3 file with the following strings:
+
+```
+happy clam
+happy clown
+happy bottle of bees
+happy bottle of kazoos
+```
 
 Example: http://neuralpro.be/blog/2017/2/the-love-schema/
+
+Only tested on linux, so YMMV on other platforms.
 
 ## Requires 
 - gTTS
