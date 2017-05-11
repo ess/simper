@@ -8,10 +8,12 @@ A json file constructed like so:
 	"happy": [
 		"clam",
 		"clown",
-		"bottle of": [
-			"bees",
-			"kazoos"
-		]
+		{
+			"bottle of": [
+				"bees",
+				"kazoos"
+			]
+		}
 	]
 }
 ```
