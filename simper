@@ -1,14 +1,19 @@
 #!/usr/bin/env python
 
-import os
+import os,sys
 import json
+import argparse
 from gtts import gTTS
 
 
-class PoetryReader(object):
+class JSONReader(object):
     rows = []
 
     def reader(self, obj, pre=None):
+        """
+        iterate over json object, returning each path as a string, 
+        suitable for reading by robot voice
+        """
 
         pre = pre[:] if pre else []
 
@@ -26,22 +31,32 @@ class PoetryReader(object):
             " ".join(out)
             self.rows.append(out)
 
-    def run(self, filename):
+    def write_mp3(self, filename):
+        """
+        write an mp3 named for the json file provided
+        """
         outfile = "%s.mp3"%os.path.splitext(filename)[0]
         with open(filename, "r") as f:
             poim = json.loads(f.read())
             self.reader(poim)
             s = ".\n".join([" ".join(row) for row in self.rows])
-            tts = gTTS(text = s, lang = "en")
+            tts = gTTS(text = s, lang = self.lang)
             tts.save(outfile)
 
 
 if __name__ == "__main__":
-    pr = PoetryReader()
-    for filename in [
-            #"hell-schema.json",
-            #"love-schema.json",
-            "interlocutor-schema.json",
-            ]:
-        pr.run(filename)
 
+    parser = argparse.ArgumentParser(description = "ever-so-useful script to audibly navigate a JSON object")
+    parser.add_argument("filenames", type=str, nargs = "+", help="json files to parse")
+    parser.add_argument("--language", dest="language", action="store", help="""two-character ISO 639-1 language code. Defaults to "en" """)
+
+    args = parser.parse_args()
+
+    jr = JSONReader()
+
+    jr.lang = "en"
+    if args.language:
+        jr.lang = args.language
+
+    for filename in args.filenames:
+        jr.write_mp3(filename)
