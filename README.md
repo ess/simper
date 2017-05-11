@@ -1,5 +1,5 @@
 # simper
-Parse JSON file "end-to-end" and output text to an mp3 file of the same name. Not particularly useful, but I was having fun writing bad poetry in JSON format,s ince sestinas are so, like 12th century, man.
+Parse JSON file "end-to-end" and output text to an mp3 file of the same name. Not particularly useful, but I was having fun writing bad poetry in JSON format, since sestinas are so, like 12th century, man.
 
 A json file constructed like so:
 
