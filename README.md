@@ -22,4 +22,4 @@ optional arguments:
 ```
 
 ## Installation
-You should probably use a nice virtualenv, since it's not worth the trouble of putting in your path or whatever. Install gTTS ```pip install -r requirements.txt````, and you should be good to go.
+You should probably use a nice virtualenv, since it's not worth the trouble of putting in your path or whatever. Install gTTS ```pip install -r requirements.txt```, and you should be good to go.
